@@ -17,11 +17,12 @@ DOWNLOAD_DIRECTORY.mkdir(exist_ok=True, parents=True)
 if __name__ == "__main__":
     args = parser.parse_args()
 
-    link = args.yt_link
-    ydl_options = {
-        "format": "bv*[ext=mp4][height<=1080]", 
-        "outtmpl": str(DOWNLOAD_DIRECTORY / "%(id)s.%(ext)s"),
-    }
+    if len(args.yt_link) > 0:
+        link = args.yt_link
+        ydl_options = {
+            "format": "bv*[ext=mp4][height<=1080]", 
+            "outtmpl": str(DOWNLOAD_DIRECTORY / "%(id)s.%(ext)s"),
+        }
 
-    with yt_dlp.YoutubeDL(ydl_options) as ydl:
-        ydl.download([link])
+        with yt_dlp.YoutubeDL(ydl_options) as ydl:
+            ydl.download([link])
