@@ -45,5 +45,5 @@ if __name__ == "__main__":
     else:
         vid_path = f"{VID_PATH}/{args.new_vid_name}.mp4"
         collect_frames(vid_path)
-            
+
     

@@ -21,6 +21,7 @@ Thumbs.db
 # ===== Directories for videos/frames =====
 FRAMES/
 YT_DOWNLOADS/
+txt_TEST/
 *.mp4
 *.avi
 *.jpg
