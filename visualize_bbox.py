@@ -7,6 +7,9 @@ import cv2
 import math
 from pathlib import Path
 
+LABELS_PATH = Path("LABELS")
+LABELS_PATH.mkdir(parents=True, exist_ok=True)
+
 scale = -1
 num_clicks = 0
 
@@ -19,6 +22,17 @@ def on_click(event, x, y, flags, param):
         print(f"CLICK preview=({x},{y})  ->  orig=({orig_x:.1f},{orig_y:.1f})  scale={scale:.4f}")
         box_nums.append((orig_x, orig_y))
         normalized_box_nums.append((orig_x/img_w, orig_y/img_h))
+
+def save_txt(box_nums, path):
+    with open(f"LABELS/{path.stem}.txt", "w") as f:
+        
+        for i in range(0, len(box_nums), 2):  # iterate through list of top left and bottom right coordinates
+            f.write("0 ")
+            top_l = box_nums[i]
+            bot_r = box_nums[i+1]
+            x_c, y_c = (bot_r[0] + top_l[0])/2, (bot_r[1] + top_l[1])/2
+            box_w, box_h = bot_r[0] - top_l[0], bot_r[1] - top_l[1]
+            f.write(f"{x_c} {y_c} {box_w} {box_h}\n")
         
 screen_w, screen_h = 1920, 1080 
 
@@ -47,16 +61,16 @@ while True:
     if key == ord('q'):
         break
 
-print(normalized_box_nums)
+    if key == ord('s'):
+        print(img_path.stem)
+        same_name_count = 0
+        for f in Path("FRAMES").iterdir():
+            if f.stem.split('_')[0] == img_path.stem.split('_')[0]:
+                same_name_count += 1
+                save_txt(normalized_box_nums, f)
+
+# print(normalized_box_nums)
 
 cv2.destroyAllWindows()
 
-with open(f"txt_TEST/{img_path.stem}_test.txt", "w") as f:
-    
-    for i in range(0, len(normalized_box_nums), 2):  # iterate through list of top left and bottom right coordinates
-        f.write("0 ")
-        top_l = normalized_box_nums[i]
-        bot_r = normalized_box_nums[i+1]
-        x_c, y_c = (bot_r[0] + top_l[0])/2, (bot_r[1] + top_l[1])/2
-        box_w, box_h = bot_r[0] - top_l[0], bot_r[1] - top_l[1]
-        f.write(f"{x_c} {y_c} {box_w} {box_h}\n")
+
