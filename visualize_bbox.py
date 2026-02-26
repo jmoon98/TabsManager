@@ -42,7 +42,7 @@ normalized_box_nums = []
 cv2.namedWindow("Frame")
 cv2.setMouseCallback("Frame", on_click)
 
-img_path = Path("FRAMES/AwmPen5FcRI_320.jpg")
+img_path = Path("FRAMES/y-FuQJahARQ_320.jpg")
 img = cv2.imread(img_path)
 img_h, img_w = img.shape[:2]
 

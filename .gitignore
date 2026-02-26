@@ -22,7 +22,15 @@ Thumbs.db
 FRAMES/
 YT_DOWNLOADS/
 txt_TEST/
+LABELS/
 *.mp4
 *.avi
 *.jpg
 *.png
+
+# ===== Directories for models and training =====
+dataset/
+models/
+output/
+cuda_test.py
+*.pt
