@@ -32,5 +32,7 @@ LABELS/
 dataset/
 models/
 output/
+pdf_to_img/
+tab_pdfs/
 cuda_test.py
 *.pt

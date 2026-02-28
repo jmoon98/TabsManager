@@ -1,2 +1,7 @@
-yt-dlp
+ultralytics
 opencv-python
+scikit-image
+easyocr
+pymupdf
+yt-dlp
+torch
